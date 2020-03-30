@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: ReplicaSet
+metadata:
+  name: smpl-go-web-rs
+  labels:
+      app: smpl-go-web-a
+      tier: fontend
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      tier: fontend
+  template:
+    metadata:
+      labels:
+        app: smpl-go-web-a
+        version: "1"
+        tier: fontend  
+    spec:
+      containers:
+        - name: smpl-go-web-c
+          image: "fischerjulian/smpl-go-web:1.0.0"
+          ports:
+            - containerPort: 8080

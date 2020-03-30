@@ -1,0 +1,20 @@
+apiVersion: networking.k8s.io/v1beta1
+kind: Ingress
+metadata:
+  name: smpl-go-web-ingress
+  annotations:
+    # use the shared ingress-nginx
+    kubernetes.io/ingress.class: "nginx"
+spec:
+  tls:
+    - hosts:
+      - smpl-go-web-api-4fca26e8-2c54-4ad0-9136-542d0789b5c2.de.k9s.a9s.eu
+      secretName: k9s-anynines-com-tls
+  rules:
+  - host: smpl-go-web-api-4fca26e8-2c54-4ad0-9136-542d0789b5c2.de.k9s.a9s.eu
+    http:
+      paths:
+      - path: /
+        backend:
+          serviceName: smpl-go-web-s
+          servicePort: 8080
